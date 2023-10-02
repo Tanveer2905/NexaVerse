@@ -1,0 +1,70 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnLinkup</title>
+    <link rel = "icon" href = "/static/icon1.png" 
+        type = "image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='logopirate.jpg') }}" alt="Logo" class="logo">
+                <h1 class="title">LearnLinkup</h1>
+            </div>
+            <div class="menu-icon" id="menu-icon">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </header>
+        <div class="content">
+            <!-- Sidebar -->
+            <aside class="sidebar" id="sidebar">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="/templates/contact.html">Contact us</a></li>
+                </ul>
+            </aside>
+    <main>
+        <form method="POST">
+            <label for="topic">please select your food type:</label>
+            <input type="text" id="food type " name="type" required>
+            <input type="submit" value="Search">
+        </form>
+        {% if topic %}
+            <div class="result">
+                {% if food_type %}
+                    <h3>The best restaurant for <strong id="topic-highlight">{{ topic.capitalize() }}</strong> is:</h3>
+                    <ul>
+                        {% for food type  in food_type %}
+                            <!-- Add the data-tooltip attribute for the tooltip content -->
+                            <li class="result-item" data-tooltip="{{ food type}}">{{ food type}}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="error">{{ message }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+        <!-- Add the dialog box element
+        <div class="dialog-box" id="dialog-box">
+            <div class="foodtype-info" id="foodtype">
+                <h2 id="foodtype-name"></h2>
+                <p id="foodtype-description"></p>
+                <p id="foodtype-rating"></p>
+            </div>
+
+            <p class="dialog-text" id="dialog-text">Additional information goes here.</p>
+        </div> -->
+
+    </main>
+        </div>
+    </div>
+<script src="{{ url_for('static', filename='script.js') }}"></script> <!-- Include JavaScript file -->
+</body>
+</html>
